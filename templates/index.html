@@ -1,0 +1,145 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard-Admin</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css2?family=Fjalla+One&family=Anton&family=Montserrat:wght@900&display=swap"
+          rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.offcanvas.min.css' %}">
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/popper.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/bootstrap.offcanvas.min.js' %}"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/custom.css' %}">
+    <script type="text/javascript" src="{% static 'js/app.js' %}"></script>
+</head>
+<body class="bg-texture">
+<div class="wrapper">
+    <header class="pt-4 fixed-top top_header">
+        <div class="container-fluid">
+            <div class="row ml-4 mr-4 align-items-center">
+                <div class="col-12 col-lg-2">
+                    <div class="header pt-2">
+                        <a href="#" class="navbar-brand"><img src="{% static 'images/hero-logo.svg' %}"
+                                                              class="img-fluid"/></a>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-10">
+                    <nav class="navbar navbar-expand-sm bg-white shadow-sm pl-4 pr-4">
+                        <div class="d-flex align-items-center justify-content-between w-100">
+                            <div class="user_profile d-flex align-items-center">
+                                <div class="user_profile_img mr-3">
+                                    <img src="{% static 'images/profile_image.jpg' %}" class="img-fluid ">
+                                </div>
+                                <div class="profile_name">
+                                    <p class="mb-0 ft-14">Nupur Bansal</p>
+                                    <span>Admin</span>
+                                </div>
+                            </div>
+
+                            <div class="rtl_menu">
+                                <a href="#" class="mr-3"><img src="{% static 'images/search.svg' %}" class="menu_icon"></a>
+                                <a class="text-dark text-uppercase mr-3 ft-14" href="#">Logout</a>
+
+                            </div>
+                        </div>
+
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <aside class="side-menu fixed-top">
+        <ul class="nav">
+            <li class="nav-item active">
+                <a class="nav-link" href="#"><img src="{% static 'images/icon_1_active.svg' %}" class="menu_icon">Dashboard</a>
+            </li>
+
+        </ul>
+    </aside>
+    <main class="page-content">
+        <div class="content_box">
+            <div class="container-fluid p-0">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card shadow-sm rounded-0 cod border-0 mb-5">
+                            <div class="card-body all_data">
+                                <div class="mb-5">
+                                    <a href="#" class="text-uppercase position-relative btn_view ">Add New <img
+                                            src="{% static 'images/arrow-right.svg' %}"
+                                            class="ml-3 img-fluid icon_login"></a>
+                                </div>
+
+                                <div class="row content_row">
+                                    {% for parking in parkings %}
+                                        <div class="col-12 col-lg-3 total_moto">
+                                            <div class="card_img mx-auto">
+                                                <img src="{% static 'images/bike.png' %}" class="img-fluid">
+                                            </div>
+                                            <div class="card rounded-0 border-0 shadow">
+                                                <div class="card-body text-center">
+                                                    <div class="content_card mt-5">
+                                                        <div class="d-flex justify-content-center align-items-center pt-5">
+                                                            <div class="box-content">
+                                                                <h3 class="text-uppercase"></h3>
+{#                                                                <h6 class="text-uppercase">{{ car.car_number }}</h6>#}
+                                                                {% if parking.car_id %}
+                                                                <h6 class="text-uppercase">{{ parking.car_id.car_number }}</h6>
+                                                                    {% else %}
+                                                                <h6 class="text-uppercase">Space Free</h6>
+                                                                {% endif %}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </main>
+</div>
+<div class="filter-box notification_details">
+    <div class="d-flex justify-content-between align-items-center">
+        <div class="p-2">
+            <h3>Add New Car</h3>
+            <p>Select the desired component</p>
+        </div>
+        <div class="p-2">
+            <a href="#" class="close_btn"><img src="{% static 'images/close_btn.png' %}"></a>
+        </div>
+    </div>
+
+    <div class="filter-body p-2">
+        <form action="" method="POST" class="form selection_rbl d-flex align-items-center">
+            {% csrf_token %}
+            <div class="add_car w-100">
+                <div class="form-group">
+                    <label class="lbl">Add New Car Number{{ car.car_number }}</label>
+                    <input type="text" name="car_number" class="form-control" id="car_number"
+                           placeholder="Add New Car Number">
+                </div>
+                <button type="submit" value="POST"
+                        class="text-uppercase position-relative btn_view proceed_btn btn btn-danger">Save
+                    <img src="{% static 'images/arrow-right.svg' %}" class=" img-fluid icon_login"></button>
+            </div>
+        </form>
+    </div>
+
+</div>
+</body>
+</html>
